@@ -26,4 +26,4 @@ Decode an encoded object.
     JSON.stringify(decoded_path).length; // show length
     => 43
 
-**Decoded string is shorter than original string due to a maximum accuracy suport of 5 decimals (roughly 1m).**
+*Decoded string is shorter than original string due to a maximum accuracy suport of 5 decimals (roughly 1m).*
