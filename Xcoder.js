@@ -1,5 +1,7 @@
 function Xcoder(encoding_id){
     
+    var MAX_ACCURACY = Math.pow(10, 5);
+    
     /////////////////
     // ENCODE 1401 //
     /////////////////
@@ -23,8 +25,8 @@ function Xcoder(encoding_id){
         
         for(i=0;i<coords.length;i++){
             
-            latNew = Math.round(coords[i][0] * Math.pow(10, 5)) - latPrev;
-            lonNew = Math.round(coords[i][1] * Math.pow(10, 5)) - lonPrev;
+            latNew = Math.round(coords[i][0] * MAX_ACCURACY) - latPrev;
+            lonNew = Math.round(coords[i][1] * MAX_ACCURACY) - lonPrev;
             
             latList.push(latNew);
             lonList.push(lonNew);
@@ -46,8 +48,22 @@ function Xcoder(encoding_id){
 
     this.decode1401 = function(encodedCoords){
         
+        var ENCODING_ID = 1401;
         
+        if(encodedCoords[0] != ENCODING_ID)
+            throw "Expected encoding_id of 1401. Given string was not encoded with 1401.";
         
+        var latList = encodedCoords[1];
+        var lonList = encodedCoords[2];
+        var finalList = [[latList[0] / MAX_ACCURACY, lonList[0] / MAX_ACCURACY]];
+        
+        // lat and lon lists should be same length
+        for(i=1;i<latList.length;i++){
+            
+            finalList.push([(latList[i-1] + latList[i]) / MAX_ACCURACY, (lonList[i-1] + lonList[i])  / MAX_ACCURACY]);
+        }
+        
+        return finalList;
     };
     
     //////////
