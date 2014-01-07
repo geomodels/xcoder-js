@@ -17,12 +17,20 @@ Sample coordinate data:
 Encode an object
 
     var encoded_path = xcoder.encode(path);
+    
+    JSON.stringify(encoded_path); // show data
+    => '[1401,[-8548922,124],[4295571,-192]]'
+    
     JSON.stringify(encoded_path).length; // show length
     => 36
 
 Decode an encoded object.
 
     var decoded_path = xcoder.decode(encoded_path);
+    
+    JSON.stringify(decoded_path); // show data
+    => '[[-85.48922,42.95571],[-85.48798,42.95379]]'
+    
     JSON.stringify(decoded_path).length; // show length
     => 43
 
